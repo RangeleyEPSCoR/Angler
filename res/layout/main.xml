@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/linearLayoutFull"
+    android:orientation="vertical"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent">
+   
+    <RelativeLayout
+    	android:id="@+id/textbuttonlayout"
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content">
+     
+	    <TextView
+			android:text="Dodge Lake"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:typeface="serif" 
+			android:textSize="30dp" 
+			android:layout_marginLeft="8dp" 
+			android:layout_marginTop="6dp"
+			android:layout_alignParentLeft="true"/>
+			
+		<Button
+		    android:id="@+id/button_more"
+			android:text="More"
+			android:layout_alignParentRight="true"
+			android:layout_height="wrap_content" 
+			android:layout_width="100dp" 
+			android:paddingTop="10dp" 
+			android:layout_marginTop="4dp"/> 
+			
+			
+	</RelativeLayout>
+		
+ 	<ImageView 	
+ 		android:layout_height="wrap_content" 
+ 		android:layout_width="fill_parent"/>
+    	
+   	<Gallery xmlns:android="http://schemas.android.com/apk/res/android" 
+	    android:id="@+id/gallery"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="3"/>
+	    
+   	<Button 
+    	android:layout_weight="3" 
+    	android:id="@+id/button1" 
+    	android:layout_marginTop="10dp" 
+    	android:text="Navigate To" 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="fill_parent"/>
+	    
+</LinearLayout>
