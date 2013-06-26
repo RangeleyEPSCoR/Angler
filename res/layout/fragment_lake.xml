@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lake_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fefbfe"
+    tools:context=".ItemDetailFragment">
+    
+    <LinearLayout
+        android:id="@+id/lake_detail_picture_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10.0dip"
+        android:paddingTop="10.0dip" >
+        <ImageView
+            android:id="@+id/lake_detail_picture"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.34"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/lake_detail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lake_detail_picture_container"
+        android:background="#00000000"
+        android:fontFamily="sans-serif"
+        
+		android:textColor="#000000"
+		android:textSize="30sp"/>
+    
+    <TextView
+        android:id="@+id/extra_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+        
+        
+        
+
+    
+</RelativeLayout>
