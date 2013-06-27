@@ -158,12 +158,13 @@
         android:layout_marginRight="20sp"
         android:layout_below="@id/fish_in_lake_text"/>
     
-    <LinearLayout
+    <ListView
         android:id="@+id/list_fish_layout"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
     	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
+    	android:layout_height="500sp"
     	android:layout_below="@id/fish_bar"
-    	android:orientation="vertical"
     	android:paddingBottom="25sp"/>
     
 </RelativeLayout>

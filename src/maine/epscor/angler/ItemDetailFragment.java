@@ -3,14 +3,14 @@ package maine.epscor.angler;
 import android.app.ActionBar;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -83,23 +83,20 @@ public class ItemDetailFragment extends Fragment {
 		
 		Cursor fishInLake = db.getFishFromLake(dataObject.getInt(0));
 		
-		LinearLayout fishListLayout = (LinearLayout)rootView.findViewById(R.id.list_fish_layout); 			
-		fishInLake.moveToFirst();
-		do {
-			TextView tv = new TextView(activityContext);
-			tv.setText(fishInLake.getString(1));
-			tv.setPadding(20, 10, 10, 10);
-			
-			//Calculate sp for the padding because it only accepts normal px
-			int padding_in_dp = 20; 
-		    final float scale = activityContext.getResources().getDisplayMetrics().density;
-		    int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
-		    
-			tv.setPadding(padding_in_px, 15, 0, 15);
-			tv.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
-			tv.setTextSize(20);
-			fishListLayout.addView(tv);
-		} while (fishInLake.moveToNext());
+		ListView fishList = (ListView)rootView.findViewById(R.id.list_fish_layout);
+		
+		String [] fromFields = {"name"};
+		int [] toViews = {android.R.id.text1};
+		
+		fishList.setAdapter(new SimpleCursorAdapter(
+				activityContext,
+				android.R.layout.simple_list_item_activated_1,
+				fishInLake,
+				fromFields,
+				toViews,
+				0));
+		
+		
 		
 		//fishInLake.close();
 	}
@@ -113,7 +110,23 @@ public class ItemDetailFragment extends Fragment {
 		
 		((ImageView) rootView.findViewById(R.id.fish_detail_picture)).setImageResource(fishPictureResource);
 		((TextView) rootView.findViewById(R.id.fish_detail_title)).setText(fishName);
-		
+		/*LinearLayout fishListLayout = (LinearLayout)rootView.findViewById(R.id.list_fish_layout); 			
+		fishInLake.moveToFirst();
+		do {
+			TextView tv = new TextView(activityContext);
+			tv.setText(fishInLake.getString(1));
+			tv.setPadding(20, 10, 10, 10);
+			
+			//Calculate scale pixels for the padding because it only accepts standard pixels
+			int padding_in_dp = 20; 
+		    final float scale = activityContext.getResources().getDisplayMetrics().density;
+		    int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
+		    
+			tv.setPadding(padding_in_px, 15, 0, 15);
+			tv.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+			tv.setTextSize(20);
+			fishListLayout.addView(tv);
+		} while (fishInLake.moveToNext());*/
 		
 	}
 
