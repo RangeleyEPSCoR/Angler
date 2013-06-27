@@ -104,12 +104,13 @@ public class ItemDetailFragment extends Fragment {
 	static void populateFishFragment(View rootView, Context activityContext) {
 		dataObject.moveToFirst();
 		
-		int fishPictureResource = dataObject.getInt(3);
+		int fishPictureResource = dataObject.getInt(1);
 		
-		String fishName = dataObject.getString(1);
+		String fishName = dataObject.getString(2);
 		
 		((ImageView) rootView.findViewById(R.id.fish_detail_picture)).setImageResource(fishPictureResource);
 		((TextView) rootView.findViewById(R.id.fish_detail_title)).setText(fishName);
+		
 		/*LinearLayout fishListLayout = (LinearLayout)rootView.findViewById(R.id.list_fish_layout); 			
 		fishInLake.moveToFirst();
 		do {
