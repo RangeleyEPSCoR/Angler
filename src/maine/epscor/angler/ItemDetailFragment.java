@@ -1,13 +1,16 @@
 package maine.epscor.angler;
 
+import android.app.ActionBar;
+import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.CursorLoader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -16,112 +19,115 @@ import android.widget.TextView;
  * {@link ItemDetailActivity} on handsets.
  */
 public class ItemDetailFragment extends Fragment {
-	/**
-	 * The fragment argument representing the item ID that this fragment
-	 * represents.
-	 */
 	public static final String ARG_ITEM_ID = "item_id";
-	AnglerDbAdapter db;
-	Cursor dataObject;
-	/**
-	 * The dummy content this fragment is presenting.
-	 */
+	static AnglerDbAdapter db;
+	static Cursor dataObject;
+	static ActionBar actionBar;
+
 	private String mItem;
 
-	/**
-	 * Mandatory empty constructor for the fragment manager to instantiate the
-	 * fragment (e.g. upon screen orientation changes).
-	 */
 	public ItemDetailFragment() {
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		actionBar = getActivity().getActionBar();
+		db = new AnglerDbAdapter(getActivity());
+	    db.open();
 
-		 db = new AnglerDbAdapter(getActivity());
-	     db.open();
-	     
-	     CursorLoader mCursorLoader = new CursorLoader(getActivity());
-		
-		if (getArguments().containsKey(ARG_ITEM_ID)) {
-			// Load the dummy content specified by the fragment
-			// arguments. In a real-world scenario, use a Loader
-			// to load content from a content provider.
-			mItem = getArguments().getString(
-					ARG_ITEM_ID);
-		}
+		if (getArguments().containsKey(ARG_ITEM_ID))
+			mItem = getArguments().getString(ARG_ITEM_ID);
 		
 		String[] fragmentArgs = getArguments().getString(ARG_ITEM_ID).split(" ");
 		
-		
-		if (fragmentArgs[1].equals("lakes")) {
+		if (fragmentArgs[1].equals("lakes")) 
 			dataObject = db.getLake(Integer.parseInt(fragmentArgs[0]));
-			populateLakeFragment();
-		}
-		
-		else {
+		else 
 			dataObject = db.getFish(Integer.parseInt(fragmentArgs[0]) + 1);
-			populateFishFragment();
-		}
 		
 		mItem = fragmentArgs[1];
-		
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = null;
+		View rView = null;
 		
-
-		// Show the dummy content as text in a TextView.
+		//Now that the view is inflated we will populate with content
 		if (mItem != null && mItem.equals("lakes")) {
-			rootView = inflater.inflate(R.layout.fragment_lake,
-					container, false);
-			dataObject.moveToFirst();
-			
-			int lakePictureResource = dataObject.getInt(4);
-			
-			String lakeName = dataObject.getString(1);
-			
-			((ImageView) rootView.findViewById(R.id.lake_detail_picture)).setImageResource(lakePictureResource);
-			((TextView) rootView.findViewById(R.id.lake_detail_title)).setText(lakeName);
-
-			String extraInfo = "";
-			extraInfo += dataObject.getString(11);
-			extraInfo += dataObject.getString(12);
-			extraInfo += dataObject.getString(13);
-			
-			
-			((TextView) rootView.findViewById(R.id.extra_info)).setText(extraInfo);
-			
+			rView = inflater.inflate(R.layout.fragment_lake,container, false);
+			populateLakeFragment(rView, getActivity());
 		}
 		
 		else if (mItem != null && mItem.equals("fish")) {
-			rootView = inflater.inflate(R.layout.fragment_fish,
-					container, false);
-			dataObject.moveToFirst();
-			
-			int fishPictureResource = dataObject.getInt(3);
-			
-			String fishName = dataObject.getString(1);
-			
-			((ImageView) rootView.findViewById(R.id.fish_detail_picture)).setImageResource(fishPictureResource);
-			((TextView) rootView.findViewById(R.id.fish_detail_title)).setText(fishName);
-			
+			rView = inflater.inflate(R.layout.fragment_fish, container, false);
+			populateFishFragment(rView, getActivity());
 		}
 
-		return rootView;
+		return rView;
 	}
 	
-	static void populateLakeFragment() {
+	static void populateLakeFragment(View rootView, Context activityContext) {
+		dataObject.moveToFirst();
+		int lakePictureResource = dataObject.getInt(4);
+		String lakeName = dataObject.getString(1);
+		((ImageView) rootView.findViewById(R.id.lake_detail_picture)).setImageResource(lakePictureResource);
+		actionBar.setTitle(lakeName);
 		
+		((TextView) rootView.findViewById(R.id.boat_feature_text)).setText(dataObject.getString(11));
+		
+		
+		((TextView) rootView.findViewById(R.id.lure_feature_text)).setText(dataObject.getString(12));
+		((TextView) rootView.findViewById(R.id.icefishing_feature_text)).setText(dataObject.getString(13));
+		
+		Cursor fishInLake = db.getFishFromLake(dataObject.getInt(0));
+		
+		LinearLayout fishListLayout = (LinearLayout)rootView.findViewById(R.id.list_fish_layout); 			
+		fishInLake.moveToFirst();
+		do {
+			TextView tv = new TextView(activityContext);
+			tv.setText(fishInLake.getString(1));
+			tv.setPadding(20, 10, 10, 10);
+			
+			//Calculate sp for the padding because it only accepts normal px
+			int padding_in_dp = 20; 
+		    final float scale = activityContext.getResources().getDisplayMetrics().density;
+		    int padding_in_px = (int) (padding_in_dp * scale + 0.5f);
+		    
+			tv.setPadding(padding_in_px, 15, 0, 15);
+			tv.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+			tv.setTextSize(20);
+			fishListLayout.addView(tv);
+		} while (fishInLake.moveToNext());
+		
+		//fishInLake.close();
 	}
 	
-	static void populateFishFragment() {
+	static void populateFishFragment(View rootView, Context activityContext) {
+		dataObject.moveToFirst();
+		
+		int fishPictureResource = dataObject.getInt(3);
+		
+		String fishName = dataObject.getString(1);
+		
+		((ImageView) rootView.findViewById(R.id.fish_detail_picture)).setImageResource(fishPictureResource);
+		((TextView) rootView.findViewById(R.id.fish_detail_title)).setText(fishName);
 		
 		
-		
+	}
+
+	@Override
+	public void onPause() {
+	    super.onPause();
+	    if (db != null) {
+	        db.close();
+	        db = null;
+	    }
+	    
+	    if (dataObject != null) {
+	    	dataObject.close();
+	    	dataObject = null;
+	    }
 	}
 }

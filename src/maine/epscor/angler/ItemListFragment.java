@@ -1,5 +1,6 @@
 package maine.epscor.angler;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class ItemListFragment extends ListFragment {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     AnglerDbAdapter db;
     String fragmentType;
+    ActionBar actionBar;
     /**
      * The fragment's current callback object, which is notified of list item
      * clicks.
@@ -82,14 +84,14 @@ public class ItemListFragment extends ListFragment {
         //get type of fragment from activity
         Bundle extras = null;
 		extras = getActivity().getIntent().getExtras();
-		
+		actionBar = getActivity().getActionBar();
 		
         
         if (extras.getString("fragmentType").equals("lakes")) {
         	cursor = db.getAllLakes();
         	
         	fragmentType = "lakes";
-        	
+        	actionBar.setTitle("Lakes");
         	String[] fromFields = {"name"};
             int[] toViews = {android.R.id.text1};
             
@@ -102,12 +104,13 @@ public class ItemListFragment extends ListFragment {
             				toViews,
             				0)
             		); 
+            //cursor.close();
 		}
         else if (extras.getString("fragmentType").equals("fish")){
         	cursor = db.getAllFish();
         	
         	fragmentType = "fish";
-        	
+        	actionBar.setTitle("Fish");
         	String[] fromFields = {"name"};
             int[] toViews = {android.R.id.text1};
             
@@ -120,6 +123,7 @@ public class ItemListFragment extends ListFragment {
             				toViews,
             				0)
             		); 
+            //cursor.close();
         }  
         
         else { 
@@ -197,4 +201,13 @@ public class ItemListFragment extends ListFragment {
 
         mActivatedPosition = position;
     }
+    
+	@Override
+	public void onPause() {
+	    super.onPause();
+	    if (db != null) {
+	        db.close();
+	        db = null;
+	    }
+	}
 }
