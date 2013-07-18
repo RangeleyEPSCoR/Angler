@@ -7,7 +7,7 @@
 <RelativeLayout 
     android:id="@+id/lake_detail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#fefbfe"
     tools:context=".ItemDetailFragment">
     
@@ -15,12 +15,17 @@
         android:id="@+id/lake_detail_picture_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10.0dip">
+        android:layout_marginBottom="10sp"
+        android:layout_marginLeft="1sp"
+        android:layout_marginRight="1sp"
+        android:layout_marginTop="1sp"
+        android:background="#000000">
         
         <ImageView
             android:id="@+id/lake_detail_picture"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
+            android:layout_margin="2sp"
             android:layout_weight="0.34"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
@@ -157,15 +162,14 @@
         android:layout_marginLeft="20sp"
         android:layout_marginRight="20sp"
         android:layout_below="@id/fish_in_lake_text"/>
-    
-    <ListView
+    <LinearLayout
         android:id="@+id/list_fish_layout"
         android:layout_marginLeft="20sp"
         android:layout_marginRight="20sp"
     	android:layout_width="match_parent"
-    	android:layout_height="500sp"
+    	android:layout_height="wrap_content"
     	android:layout_below="@id/fish_bar"
-    	android:paddingBottom="25sp"/>
-    
+    	android:paddingBottom="25sp"
+    	android:orientation="vertical"/>    
 </RelativeLayout>
 </ScrollView>

@@ -7,12 +7,16 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/angler_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        
         <activity
             android:name="maine.epscor.angler.Homescreen"
             android:label="@string/app_name" >
@@ -34,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemListActivity" />
         </activity>
+        
     </application>
 
 </manifest>

@@ -32,6 +32,7 @@ public class ItemListFragment extends ListFragment {
     AnglerDbAdapter db;
     String fragmentType;
     ActionBar actionBar;
+    Cursor cursor;
     /**
      * The fragment's current callback object, which is notified of list item
      * clicks.
@@ -79,7 +80,7 @@ public class ItemListFragment extends ListFragment {
         //prepare cursor and db
         db = new AnglerDbAdapter(getActivity());
         db.open();
-        Cursor cursor;
+        
         
         //get type of fragment from activity
         Bundle extras = null;
@@ -94,7 +95,6 @@ public class ItemListFragment extends ListFragment {
         	actionBar.setTitle("Lakes");
         	String[] fromFields = {"name"};
             int[] toViews = {android.R.id.text1};
-            
             setListAdapter(
             		new SimpleCursorAdapter(
             				getActivity(), 
@@ -104,7 +104,6 @@ public class ItemListFragment extends ListFragment {
             				toViews,
             				0)
             		); 
-            //cursor.close();
 		}
         else if (extras.getString("fragmentType").equals("fish")){
         	cursor = db.getAllFish();
@@ -117,18 +116,18 @@ public class ItemListFragment extends ListFragment {
             setListAdapter(
             		new SimpleCursorAdapter(
             				getActivity(), 
-            				android.R.layout.simple_list_item_activated_1, 
-            				cursor, 
-            				fromFields, 
+            				android.R.layout.simple_list_item_activated_1,
+            				cursor,
+            				fromFields,
             				toViews,
             				0)
             		); 
-            //cursor.close();
         }  
         
         else { 
         	Toast.makeText(getActivity(), "error will robinson", Toast.LENGTH_LONG).show();
         }
+        
     }
 
     @Override
@@ -168,7 +167,7 @@ public class ItemListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(position + " " + fragmentType);
+        mCallbacks.onItemSelected(id + " " + fragmentType);
     }
 
     @Override
