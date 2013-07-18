@@ -3,13 +3,10 @@
 
     <string name="app_name">Angler</string>
     <string name="title_item_detail">Item Detail</string>
-    
-	<string name="property_true">true</string>
-	<string name="property_false">false</string>
 
-	<string name="content_explore">Explore Rangeley</string>
+	<string name="content_explore_rangeley">Explore Rangeley</string>
 	<string name="content_lakes">Lakes</string>
 	<string name="content_fish">Fish</string>
-	<string name="content_what_is">What is Angler?</string>
+	<string name="content_what_is">About Angler</string>
 	    
 </resources>

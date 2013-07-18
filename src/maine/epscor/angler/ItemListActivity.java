@@ -34,16 +34,10 @@ public class ItemListActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_item_list);
 
 		if (findViewById(R.id.item_detail_container) != null) {
-			// The detail container view will be present only in the
-			// large-screen layouts (res/values-large and
-			// res/values-sw600dp). If this view is present, then the
-			// activity should be in two-pane mode.
 			mTwoPane = true;
-
-			// In two-pane mode, list items should be given the
-			// 'activated' state when touched.
-			((ItemListFragment) getSupportFragmentManager().findFragmentById(
-					R.id.item_list)).setActivateOnItemClick(true);
+			ItemListFragment fragment = new ItemListFragment();
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.item_list, fragment).commit();
 		}
 
 		// TODO: If exposing deep links into your app, handle intents here.
@@ -54,13 +48,13 @@ public class ItemListActivity extends FragmentActivity implements
 	 * the item with the given ID was selected.
 	 */
 	@Override
-	public void onItemSelected(String id) {
+	public void onItemSelected(String fragmentTypeAndId) {
 		if (mTwoPane) {
 			// In two-pane mode, show the detail view in this activity by
 			// adding or replacing the detail fragment using a
 			// fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putString(ItemDetailFragment.ARG_ITEM_ID, id);
+			arguments.putString(ItemDetailFragment.ARG_ITEM_ID, fragmentTypeAndId);
 			ItemDetailFragment fragment = new ItemDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
@@ -70,7 +64,7 @@ public class ItemListActivity extends FragmentActivity implements
 			// In single-pane mode, simply start the detail activity
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this, ItemDetailActivity.class);
-			detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
+			detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, fragmentTypeAndId + "");
 			startActivity(detailIntent);
 		}
 	}
