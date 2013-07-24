@@ -6,9 +6,8 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -45,7 +44,10 @@ public class ItemDetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		actionBar = getActivity().getActionBar();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) 
+			actionBar = getActivity().getActionBar();
+		else
+			actionBar = null;
 		
 		me = this;
 		
@@ -59,7 +61,7 @@ public class ItemDetailFragment extends Fragment {
 		fragmentArgs = getArguments().getString(ARG_ITEM_ID).split(" ");
 		
 		if (fragmentArgs[1].equals("lakes")) 
-			dataObject = db.getLake(Integer.parseInt(fragmentArgs[0]) - 1);
+			dataObject = db.getLake(Integer.parseInt(fragmentArgs[0]));
 		else 
 			dataObject = db.getFish(Integer.parseInt(fragmentArgs[0]));
 		
@@ -86,27 +88,32 @@ public class ItemDetailFragment extends Fragment {
 		}
 		
 		else {
-			Toast.makeText(getActivity(), "oh poo", Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG).show();
 		}
 
 		return rView;
 	}
 	
 	static void populateLakeFragment(View rootView, final Context activityContext) {
-		dataObject.moveToFirst();
-		int lakePictureResource = dataObject.getInt(4);
-		String lakeName = dataObject.getString(1);
-		((ImageView) rootView.findViewById(R.id.lake_detail_picture)).setImageResource(lakePictureResource);
-		actionBar.setTitle(lakeName);
+		Cursor fishInLake = null;
+		if (dataObject.moveToFirst()){
 		
-		((TextView) rootView.findViewById(R.id.boat_feature_text)).setText(dataObject.getString(11));
+			int lakePictureResource = dataObject.getInt(4);
+			String lakeName = dataObject.getString(1);
+			((ImageView) rootView.findViewById(R.id.lake_detail_picture)).setImageResource(lakePictureResource);
+			
+			if (actionBar != null)
+				actionBar.setTitle(lakeName);
+			
+			((TextView) rootView.findViewById(R.id.boat_feature_text)).setText(dataObject.getString(11));
+			
+			((TextView) rootView.findViewById(R.id.lure_feature_text)).setText(dataObject.getString(12));
+			((TextView) rootView.findViewById(R.id.icefishing_feature_text)).setText(dataObject.getString(13));
+			
+			fishInLake = db.getFishFromLake(dataObject.getInt(0));
+		}
+		dataObject.close();
 		
-		((TextView) rootView.findViewById(R.id.lure_feature_text)).setText(dataObject.getString(12));
-		((TextView) rootView.findViewById(R.id.icefishing_feature_text)).setText(dataObject.getString(13));
-		
-		final Cursor fishInLake = db.getFishFromLake(dataObject.getInt(0));
-		
-		int numInCursor = fishInLake.getCount();
 		
 		LinearLayout fishList = (LinearLayout)rootView.findViewById(R.id.list_fish_layout);
 		fishInLake.moveToFirst();
@@ -191,16 +198,16 @@ public class ItemDetailFragment extends Fragment {
 	
 	static void populateFishFragment(View rootView, final Context activityContext) {
 		
-		dataObject.moveToFirst();
-		
-		actionBar.setTitle(dataObject.getString(2));
-		
-		int fishPictureResource = dataObject.getInt(1);
-		((ImageView) rootView.findViewById(R.id.fish_detail_picture)).setImageResource(fishPictureResource);
-		
-		LinearLayout fishListLayout = (LinearLayout)rootView.findViewById(R.id.species_information_layout); 			
-		for (int i = 3; i < dataObject.getColumnCount(); i++) {
+		if (dataObject.moveToFirst()) {
+			if (actionBar != null)
+				actionBar.setTitle(dataObject.getString(2));
 			
+			int fishPictureResource = dataObject.getInt(1);
+			((ImageView) rootView.findViewById(R.id.fish_detail_picture)).setImageResource(fishPictureResource);
+			
+			LinearLayout fishListLayout = (LinearLayout)rootView.findViewById(R.id.species_information_layout); 			
+			for (int i = 3; i < dataObject.getColumnCount(); i++) {
+				
 			LinearLayout infoLayout = new LinearLayout(activityContext);
 			infoLayout.setOrientation(LinearLayout.VERTICAL);
 			
@@ -215,6 +222,7 @@ public class ItemDetailFragment extends Fragment {
 			tv.setText(dataObject.getString(i));
 			tv.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
 			tv.setTextSize(20);
+	
 			
 			//Calculate scale pixels for the padding because it only accepts standard pixels
 			int padding_in_dp = 20; 
@@ -225,6 +233,7 @@ public class ItemDetailFragment extends Fragment {
 			infoLayout.addView(tv);
 			
 			fishListLayout.addView(infoLayout);
+		}
 		}
 
 		Cursor lakesFromFish = db.getLakesFromFish(dataObject.getInt(0));

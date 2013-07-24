@@ -1,75 +1,51 @@
 package maine.epscor.angler;
 
+
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-//import android.support.v4.widget.SimpleCursorAdapter;
 
-//import com.example.angler.dummy.DummyContent;
-
-/**
- * A list fragment representing a list of Items. This fragment
- * also supports tablet devices by allowing list items to be given an
- * 'activated' state upon selection. This helps indicate which item is
- * currently being viewed in a {@link ItemDetailFragment}.
- * <p>
- * Activities containing this fragment MUST implement the {@link Callbacks}
- * interface.
- */
 public class ItemListFragment extends ListFragment {
 
-    /**
-     * The serialization (saved instance state) Bundle key representing the
-     * activated item position. Only used on tablets.
-     */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     AnglerDbAdapter db;
     String fragmentType;
     ActionBar actionBar;
-    Cursor cursor;
-    /**
-     * The fragment's current callback object, which is notified of list item
-     * clicks.
-     */
+    Bundle extras;
+
     private Callbacks mCallbacks = sDummyCallbacks;
 
-    /**
-     * The current activated item position. Only used on tablets.
-     */
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
-    /**
-     * A callback interface that all activities containing this fragment must
-     * implement. This mechanism allows activities to be notified of item
-     * selections.
-     */
     public interface Callbacks {
-        /**
-         * Callback for when an item has been selected.
-         */
         public void onItemSelected(String id);
     }
 
-    /**
-     * A dummy implementation of the {@link Callbacks} interface that does
-     * nothing. Used only when this fragment is not attached to an activity.
-     */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
         public void onItemSelected(String id) {
         }
     };
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    
     public ItemListFragment() {
     }
 
@@ -83,45 +59,43 @@ public class ItemListFragment extends ListFragment {
         
         
         //get type of fragment from activity
-        Bundle extras = null;
+        extras = null;
 		extras = getActivity().getIntent().getExtras();
-		actionBar = getActivity().getActionBar();
 		
-        
-        if (extras.getString("fragmentType").equals("lakes")) {
-        	cursor = db.getAllLakes();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) 
+			actionBar = getActivity().getActionBar();
+		else
+			actionBar = null;
+		
+		fragmentType = extras.getString("fragmentType");
+		
+        if (fragmentType.equals("lakes")) {
+        	ArrayList<String> names = new ArrayList<String>();
+        	Cursor cursor = db.getAllLakes();
+        	cursor.moveToFirst();
+        	do {	
+        		names.add(cursor.getString(1));
+    		} while(cursor.moveToNext());
+        	cursor.close();
         	
-        	fragmentType = "lakes";
-        	actionBar.setTitle("Lakes");
-        	String[] fromFields = {"name"};
-            int[] toViews = {android.R.id.text1};
-            setListAdapter(
-            		new SimpleCursorAdapter(
-            				getActivity(), 
-            				android.R.layout.simple_list_item_activated_1, 
-            				cursor, 
-            				fromFields, 
-            				toViews,
-            				0)
-            		); 
+        	setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, names));
+        	
+        	if (actionBar != null)
+        		actionBar.setTitle("Lakes");
 		}
         else if (extras.getString("fragmentType").equals("fish")){
-        	cursor = db.getAllFish();
+        	ArrayList<String> names = new ArrayList<String>();
+        	Cursor cursor = db.getAllFish();
+        	cursor.moveToFirst();
+        	do {	
+        		names.add(cursor.getString(1));
+    		} while(cursor.moveToNext());
+        	cursor.close();
         	
-        	fragmentType = "fish";
-        	actionBar.setTitle("Fish");
-        	String[] fromFields = {"name"};
-            int[] toViews = {android.R.id.text1};
-            
-            setListAdapter(
-            		new SimpleCursorAdapter(
-            				getActivity(), 
-            				android.R.layout.simple_list_item_activated_1,
-            				cursor,
-            				fromFields,
-            				toViews,
-            				0)
-            		); 
+        	setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, names));
+        	
+        	if (actionBar != null)
+        		actionBar.setTitle("Fish");
         }  
         
         else { 
@@ -204,9 +178,12 @@ public class ItemListFragment extends ListFragment {
 	@Override
 	public void onPause() {
 	    super.onPause();
+	    
 	    if (db != null) {
 	        db.close();
 	        db = null;
 	    }
 	}
+	
+	
 }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,10 +11,14 @@
     tools:context=".ItemListActivity"
     tools:layout="@android:layout/list_content" />
  -->
- 
+
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="fill_parent"
+ 	android:baselineAligned="false">
+	
      <fragment
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/item_list"
         android:name="maine.epscor.angler.ItemListFragment"
         android:layout_width="match_parent"
@@ -23,3 +28,4 @@
     	android:layout_marginRight="20dp"
         tools:layout="@android:layout/list_content" 
         tools:context=".ItemListActivity"/>
+ </LinearLayout>

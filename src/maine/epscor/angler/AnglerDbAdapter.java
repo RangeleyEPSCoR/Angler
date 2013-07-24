@@ -14,7 +14,7 @@ public class AnglerDbAdapter {
 	private final Context ADbAContext;
 	
 	private static final String DATABASE_NAME = "angler.db";
-	private static final int DATABASE_VERSION = 18;
+	private static final int DATABASE_VERSION = 19;
 
 	public static final String TABLE_lakes = "lakes";
 	public static final String TABLE_fish = "fish";
@@ -41,7 +41,7 @@ public class AnglerDbAdapter {
 		"INSERT INTO LAKES values (14,'Bunker Pond',0,0," + R.drawable.bunker_pond + ",44.664178,-70.614598,5,3,35,1065,'Boat Launch - Hand Carry','Artificial Lures Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (15,'Butler Pond',0,0," + R.drawable.butler_pond + ",45.293501,-70.441020,24,3,45,1536,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (16,'C Pond',0,0," + R.drawable.c_pond + ",44.718345,-70.884226,36,10,173,1292,'No Boat Launch','Artificial Lures Only','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (17,'Chain of Ponds',0,0," + R.drawable.chain_of_ponds + ",45.323198,-70.640110,106,24,700,1280,'No Boat Launch','General','Jan 1 to Mar 31');", 
+		"INSERT INTO LAKES values (17,'Chain of Ponds',0,0," + R.drawable.chain_of_ponds + ",45.323198,-70.640110,106,24,700,1280,'No Boat Launch','General','Ice Fishing: Jan 1 to Mar 31');", 
 		"INSERT INTO LAKES values (18,'Chase Pond',0,0," + R.drawable.chase_pond + ",45.259928,-70.555462,21,'unk',14,1190,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (19,'Cloutman Pond',0,0," + R.drawable.cloutman_pond + ",45.009670,-70.804862,5,3,20,1473,'No Boat Launch','General','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (20,'Cow Pond',0,0," + R.drawable.cow_pond + ",45.037212,-70.637083,6,4,62,1804,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
@@ -54,16 +54,16 @@ public class AnglerDbAdapter {
 		"INSERT INTO LAKES values (27,'East Richardson Pond #1',0,0," + R.drawable.east_richardson_pond1 + ",44.930213,-70.883956,20,11,85,1778,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (28,'East Richardson Pond #2',0,0," + R.drawable.east_richardson_pond2 + ",44.924498,-70.887189,15,9,54,1775,'No Boat Launch','Artificial Lures Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (29,'Eddy Pond',0,0," + R.drawable.eddy_pond + ",44.918278,-70.525658,22,6,9,2634,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (30,'Ellis (Roxbury) Pond',0,0," + R.drawable.ellis_roxbury_pond + ",44.660929,-70.675771,43,10,920,830,'Boat Launch - Trailerable','General','Dec 1 to Apr 30');", 
-		"INSERT INTO LAKES values (31,'Flagstaff lake',0,0," + R.drawable.flagstaff_lake + ",45.156238,-70.439798,50,18,20300,1147,'Boat Launch - Trailerable','General','Dec 1 to Apr 30');", 
+		"INSERT INTO LAKES values (30,'Ellis (Roxbury) Pond',0,0," + R.drawable.ellis_roxbury_pond + ",44.660929,-70.675771,43,10,920,830,'Boat Launch - Trailerable','General','Ice Fishing: Ice Fishing: Dec 1 to Apr 30');", 
+		"INSERT INTO LAKES values (31,'Flagstaff lake',0,0," + R.drawable.flagstaff_lake + ",45.156238,-70.439798,50,18,20300,1147,'Boat Launch - Trailerable','General','Ice Fishing: Dec 1 to Apr 30');", 
 		"INSERT INTO LAKES values (32,'Flatiron Pond',0,0," + R.drawable.flatiron_pond + ",45.068508,-70.696726,23,6,30,1972,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (33,'Goodwin Pond',0,0," + R.drawable.goodwin_pond + ",44.941591,-70.848520,7,5,7,1473,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (34,'Grants Pond',0,0," + R.drawable.grants_pond + ",45.288512,-70.783354,6,4,20,2120,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (35,'Greely Pond',0,0," + R.drawable.greely_pond + ",45.022942,-70.615220,2,1,42,1590,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (36,'Greenbush Pond',0,0," + R.drawable.greenbush_pond + ",45.249013,-70.520662,22,'unk',21,1188,'No Boat Launch','General','Dec 1 to Apr 30');", 
+		"INSERT INTO LAKES values (36,'Greenbush Pond',0,0," + R.drawable.greenbush_pond + ",45.249013,-70.520662,22,'unk',21,1188,'No Boat Launch','General','Ice Fishing: Dec 1 to Apr 30');", 
 		"INSERT INTO LAKES values (37,'Grindstone Pond',0,0," + R.drawable.grindstone_pond + ",45.002997,-70.204670,30,12,6,1302,'Boat Launch - Hand Carry','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (38,'Gull Pond',0,0," + R.drawable.gull_pond + ",44.989275,-70.637464,40,15,281,1590,'Boat Launch - Hand Carry','No Live Fish As Bait','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (39,'Haley Pond',0,0," + R.drawable.haley_pond + ",44.971680,-70.628887,23,8,170,1524,'Boat Launch - Hand Carry','No Live Fish As Bait','Jan 1 to Mar 31 No Live Fish As Bait');", 
+		"INSERT INTO LAKES values (39,'Haley Pond',0,0," + R.drawable.haley_pond + ",44.971680,-70.628887,23,8,170,1524,'Boat Launch - Hand Carry','No Live Fish As Bait','Ice Fishing: Jan 1 to Mar 31 No Live Fish As Bait');", 
 		"INSERT INTO LAKES values (40,'Harvey Pond',0,0," + R.drawable.harvey_pond + ",44.854975,-70.502560,8,5,10,985,'Boat Launch - Hand Carry','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (41,'Jim Pond',0,0," + R.drawable.jim_pond + ",45.266015,-70.505326,125,40,320,1231,'Boat Launch - Trailerable','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (42,'Johns Pond',0,0," + R.drawable.johns_pond + ",45.074482,-70.771893,49,24,267,1754,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
@@ -85,13 +85,13 @@ public class AnglerDbAdapter {
 		"INSERT INTO LAKES values (58,'Long Pond',0,0," + R.drawable.long_pond + ",44.843154,-70.675518,114,40,254,2330,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (59,'Long Pond (Seven Ponds)',0,0," + R.drawable.long_pond_seven_ponds + ",45.255200,-70.776174,15,8,45,1986,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (60,'Loon Lake',0,0," + R.drawable.loon_lake + ",45.023926,-70.655644,50,21,192,1713,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (61,'Lufkin Pond',0,0," + R.drawable.lufkin_pond + ",44.841090,-70.463330,28,12,47,915,'No Boat Launch','General','Jan 1 to Mar 31');", 
+		"INSERT INTO LAKES values (61,'Lufkin Pond',0,0," + R.drawable.lufkin_pond + ",44.841090,-70.463330,28,12,47,915,'No Boat Launch','General','Ice Fishing: Jan 1 to Mar 31');", 
 		"INSERT INTO LAKES values (62,'Midway Pond',0,0," + R.drawable.midway_pond + ",44.930133,-70.542987,29,11,7,2705,'Boat Launch - Hand Carry','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (63,'Mooselookmeguntic Lake',0,0," + R.drawable.mooselookmeguntic_lake + ",44.978130,-70.788508,123,60,16300,1467,'Boat Launch - Trailerable','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (64,'Mount Blue Pond',0,0," + R.drawable.mount_blue_pond + ",44.765603,-70.335632,38,17,134,1175,'Boat Launch - Hand Carry','General','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (65,'Mountain Pond',0,0," + R.drawable.mountain_pond + ",44.895247,-70.643570,36,13,40,2363,'Boat Launch - Hand Carry','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (66,'Moxie Pond',0,0," + R.drawable.moxie_pond + ",44.845377,-70.685733,24,7,6,2330,'Boat Launch - Hand Carry','Fly Fishing Only','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (67,'M ud Pond (Jim Pond Twp)',0,0," + R.drawable.mud_pond_jim_pond_twp + ",45.251676,-70.494482,22,'unk',14,1220,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
+		"INSERT INTO LAKES values (67,'Mud Pond (Jim Pond Twp)',0,0," + R.drawable.mud_pond_jim_pond_twp + ",45.251676,-70.494482,22,'unk',14,1220,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (68,'Mud Pond (Lower Cupsuptic)',0,0," + R.drawable.mud_pond_lower_cupsuptic_ + ",45.027771,-70.817256,7,4,6,1510,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (69,'Mud Pond (Twp 6 N of Weld)',0,0," + R.drawable.mud_pond_twp_6_n_of_weld + ",44.844755,-70.487401,9,5,9,1156,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (70,'Northwest Pond',0,0," + R.drawable.northwest_pond + ",45.298455,-70.788107,25,12,45,2190,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
@@ -123,24 +123,24 @@ public class AnglerDbAdapter {
 		"INSERT INTO LAKES values (96,'Sandy River Pond - Upper',0,0," + R.drawable.sandy_river_pond_upper_3 + ",44.895440,-70.566011,14,5,28,1700,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (97,'Schoolhouse Pond',0,0," + R.drawable.schoolhouse_pond + ",44.774114,-70.263706,20,7,3,1480,'Boat Launch - Hand Carry','Artificial Lures Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (98,'Secret Pond',0,0," + R.drawable.secret_pond + ",45.250937,-70.774631,9,4,10,2030,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (99,'Shallow Pond',0,0," + R.drawable.shallow_pond + ",45.261064,-70.533798,6,3,65,1197,'No Boat Launch','General','Dec 1 to Apr 30');", 
+		"INSERT INTO LAKES values (99,'Shallow Pond',0,0," + R.drawable.shallow_pond + ",45.261064,-70.533798,6,3,65,1197,'No Boat Launch','General','Ice Fishing: Dec 1 to Apr 30');", 
 		"INSERT INTO LAKES values (100,'Snow Mountain Pond',0,0," + R.drawable.snow_mountain_pond + ",45.276920,-70.702315,7,'unk',10,2816,'No Boat Launch','Ind Ter','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (101,'South Boundary Pond',0,0," + R.drawable.snow_mountain_pond + ",45.291497,-70.796499,5,4,10,2136,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (102,'South Pond',0,0," + R.drawable.south_pond + ",44.867788,-70.557298,29,11,9,2174,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (103,'Spencer Pond',0,0," + R.drawable.spencer_pond + ",44.821767,-70.688034,30,8,15,2160,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (104,'Stetson Pond',0,0," + R.drawable.stetson_pond + ",44.848393,-70.477278,36,14,11,1151,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (105,'Sturtevant Pond',0,0," + R.drawable.sturtevant_pond + ",44.868109,-71.021640,58,23,518,1247,'No Boat Launch','No Live Fish As Bait','Jan 1 to Mar 31 No Live Fish As Bait');", 
+		"INSERT INTO LAKES values (105,'Sturtevant Pond',0,0," + R.drawable.sturtevant_pond + ",44.868109,-71.021640,58,23,518,1247,'No Boat Launch','No Live Fish As Bait','Ice Fishing: Jan 1 to Mar 31 No Live Fish As Bait');", 
 		"INSERT INTO LAKES values (106,'Sunday Pond',0,0," + R.drawable.sunday_pond + ",44.798906,-70.952684,50,24,30,1410,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');",
 		"INSERT INTO LAKES values (107,'Swift River Pond',0,0," + R.drawable.swift_river_pond + ",44.841399,-70.592246,10,5,10,2216,'No Boat Launch','Artificial Lures Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (108,'Tea Pond',0,0," + R.drawable.tea_pond + ",45.232920,-70.528988,115,45,90,1313,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (109,'Tim Pond & Mud Pond',0,0," + R.drawable.tim_pond_and_mud_pond + ",45.162536,-70.625419,46,13,320,2012,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (110,'Toothaker Pond',0,0," + R.drawable.toothaker_pond + ",44.868729,-70.397221,20,11,30,795,'No Boat Launch','No Live Fish As Bait','Jan 1 to Mar 31 No Live Fish As Bait 2 Lines per person');", 
+		"INSERT INTO LAKES values (110,'Toothaker Pond',0,0," + R.drawable.toothaker_pond + ",44.868729,-70.397221,20,11,30,795,'No Boat Launch','No Live Fish As Bait','Ice Fishing: Jan 1 to Mar 31 No Live Fish As Bait 2 Lines per person');", 
 		"INSERT INTO LAKES values (111,'Tufts Pond',0,0," + R.drawable.tufts_pond + ",44.997199,-70.200266,43,9,53,1268,'No Boat Launch','Artificial Lures Only','Ice Fishing Closed');", 
 		"INSERT INTO LAKES values (112,'Tumbledown Pond',0,0," + R.drawable.tumbledown_pond + ",44.749750,-70.541729,22,8,9,2674,'No Boat Launch','No Live Fish As Bait','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (113,'Umbagog Lake',0,0," + R.drawable.umbagog_lake + ",44.805285,-71.027154,48,14,7850,1246,'No Boat Launch','General','Jan 1 to Mar 31 No LL Salmon');", 
-		"INSERT INTO LAKES values (114,'Webb Lake',0,0," + R.drawable.webb_lake + ",44.701967,-70.452740,42,24,2146,677,'Boat Launch - Trailerable','General','Jan 1 to Mar 31');", 
+		"INSERT INTO LAKES values (113,'Umbagog Lake',0,0," + R.drawable.umbagog_lake + ",44.805285,-71.027154,48,14,7850,1246,'No Boat Launch','General','Ice Fishing: Jan 1 to Mar 31 No LL Salmon');", 
+		"INSERT INTO LAKES values (114,'Webb Lake',0,0," + R.drawable.webb_lake + ",44.701967,-70.452740,42,24,2146,677,'Boat Launch - Trailerable','General','Ice Fishing: Jan 1 to Mar 31');", 
 		"INSERT INTO LAKES values (115,'Wells Pond',0,0," + R.drawable.wells_pond + ",45.180133,-70.980534,16,10,7,1634,'No Boat Launch','Fly Fishing Only','Ice Fishing Closed');", 
-		"INSERT INTO LAKES values (116,'Wethern (Welhern) Pond',0,0," + R.drawable.wethern_welhern_pond + ",45.213101,-70.493597,16,7,9,1187,'No Boat Launch','General','Dec 1 to Apr 30');"
+		"INSERT INTO LAKES values (116,'Wethern (Welhern) Pond',0,0," + R.drawable.wethern_welhern_pond + ",45.213101,-70.493597,16,7,9,1187,'No Boat Launch','General','Ice Fishing: Dec 1 to Apr 30');"
 		};
 	
 	

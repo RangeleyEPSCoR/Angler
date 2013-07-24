@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +23,10 @@ public class Homescreen extends Activity{
 	}
 	
 	public void onClickLakesButton(View v) {
-		Intent launchFragment = new Intent();
-		launchFragment.setClass(getApplicationContext(), ItemListActivity.class);
-		launchFragment.putExtra("fragmentType", "lakes");
-		startActivity(launchFragment);
-		
+			Intent launchFragment = new Intent();
+			launchFragment.setClass(getApplicationContext(), ItemListActivity.class);
+			launchFragment.putExtra("fragmentType", "lakes");
+			startActivity(launchFragment);
 	}
 	
 	public void onClickFishButton(View v) {
@@ -68,7 +68,11 @@ public class Homescreen extends Activity{
 		           }
 		       });
 		// Create the AlertDialog
-		builder.setMessage("Angler is AWESOME!!");
+		builder.setTitle("About Angler");
+		builder.setMessage("Angler is designed to help you with fishing.  Use Angler to help identify a catch, or to study which fish may be caught and where.  " +
+				"You can also consult the Maine department of Inland Wildlife and Fisheries’ laws and regulations to find out catch limits and minimum lengths of fish." +
+				"\n\nAngler was developed by Chris Bond and his advisor Chris Bennett and with help from the Maine IF&W." +
+				"\n\nThis activity is supported by NSF number EPS-0904155 to Maine EPSCoR at University of Maine");
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
